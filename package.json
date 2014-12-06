@@ -8,7 +8,6 @@
 		"JSONStream": "x",
 		"event-stream": "x",
 		"should": "x",
-		"mocha": "x",
 		"colors": "x"
 		}
 }

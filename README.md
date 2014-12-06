@@ -1,13 +1,17 @@
 Curly - Web-Service Monitoring
 =====
 
-Curly is a [Node.js](http://nodejs.org/) app for monitoring webservices with the [Mocha](https://github.com/mochajs/mocha) test framework, verifying them using [Should.js](https://github.com/shouldjs/should.js) and alerting of any failures using [Pushbullet](https://www.pushbullet.com) push notifications.
+Curly is a [Node.js](http://nodejs.org/) app for monitoring web-services with the [Mocha](http://mochajs.org/) test framework, verifying them with [Should.js](https://github.com/shouldjs/should.js) and alerting of any failures using [Pushbullet](https://www.pushbullet.com) push notifications.
 
 ##Install
-    git clone https://github.com/onato/Curly.git
-    cd Curly
-    npm install
-    node scheduler.js
+
+```bash
+git clone https://github.com/onato/Curly.git
+cd Curly
+npm install
+npm install -g mocha
+node scheduler.js
+```
 
 All test in the `test/` folder will be run.
 
