@@ -21,8 +21,8 @@ process.stdin
 		var body =  encodeURIComponent(messages);
 		request.post({
 		  url:     'https://api.pushbullet.com/v2/pushes',
-		  headers: {"Authorization": "Bearer "+config.pushbullet.AccessToken},
-		  form:    "body=" + body + "&email=" + email + "&type=note&title="+config.pushbullet.AlertTitle
+		  headers: {"Authorization": "Bearer "+config.pushbullet.accessToken},
+		  form:    "body=" + body + "&email=" + email + "&type=note&title="+config.pushbullet.alertTitle
 		}, function(error, response, body){
 			if (error) {
 				console.log(error);

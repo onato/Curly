@@ -1,8 +1,8 @@
 var config = {}
 
 config.pushbullet = {
-	"email":"onato.com@gmail.com",
-	"AccessToken":"eHUemjHKPMnbqhvaQvu6GF6iRW5yTTNr",
+	"Email":"your-pushbullet-email@example.com",
+	"AccessToken":"your-pushbullet-access-token",
 	"AlertTitle":"Curly Alert"
 };
 
