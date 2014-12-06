@@ -1,0 +1,11 @@
+# Site navigation links
+
+- title: Documentation
+  url: /documentation/
+  excerpt: "Documentation for setting up and testing web services with Curly."
+  image: 300x200.gif
+
+- title: Download
+  url: /download/
+  excerpt: "Download Curly."
+  image: 300x200.gif

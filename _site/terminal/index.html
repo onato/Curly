@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Terminal • CURLY: Webservice Client</title>
+    <meta name="description" content="Export your services as curl commands so you can easily share them. To monitor them and protect yourself from service changes export them to be run by the Curly Test Runner.
+
+">
+    <meta name="keywords" content="">
+    
+    
+    	<!-- Twitter Cards -->
+	<meta name="twitter:title" content="Terminal">
+	<meta name="twitter:description" content="Export your services as curl commands so you can easily share them. To monitor them and protect yourself from service changes export them to be run by the Curly Test Runner.
+
+">
+	
+	
+	
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:image" content="/images/">
+	
+	<!-- Open Graph -->
+	<meta property="og:locale" content="">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Terminal">
+	<meta property="og:description" content="Export your services as curl commands so you can easily share them. To monitor them and protect yourself from service changes export them to be run by the Curly Test Runner.
+
+">
+	<meta property="og:url" content="/terminal/">
+	<meta property="og:site_name" content="CURLY: Webservice Client">
+    
+
+    <link rel="canonical" href="/terminal/">
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="CURLY: Webservice Client Atom Feed">
+    <link href="/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+
+    <style>
+    .sliding-menu-content {
+      top: 0;
+      right: 0;
+      text-align: center;
+      visibility: hidden;
+      height: 100%;
+      width: 100%;
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+    </style>
+
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- HTML5 Shiv and Media Query Support for IE -->
+    <!--[if lt IE 9]>
+      <script src="/js/vendor/html5shiv.min.js"></script>
+      <script src="/js/vendor/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <header id="masthead">
+  <div class="inner-wrap">
+    <a href="" class="site-title">CURLY: Webservice Client</a>
+    <nav role="navigation" class="menu top-menu">
+        <ul class="menu-item">
+	<li class="home"><a href="/">CURLY: Webservice Client</a></li>
+	
+    
+        
+    
+    <li><a href="/documentation/" >Documentation</a></li>
+  
+    
+        
+    
+    <li><a href="/download/" >Download</a></li>
+  
+</ul>
+    </nav>
+  </div><!-- /.inner-wrap -->
+</header><!-- /.masthead -->
+    <nav role="navigation" class="js-menu sliding-menu-content">
+	<ul class="menu-item">
+		<li>
+      
+        
+      
+			<a href="/documentation/"><img src="/images/300x200.gif" alt="teaser" class="teaser"></a>
+			<a href="/documentation/" class="title">Documentation</a>
+			<p class="excerpt">Documentation for setting up and testing web services with Curly.</p>
+		</li><li>
+      
+        
+      
+			<a href="/download/"><img src="/images/300x200.gif" alt="teaser" class="teaser"></a>
+			<a href="/download/" class="title">Download</a>
+			<p class="excerpt">Download Curly.</p>
+		</li>
+	</ul>
+</nav>
+<button type="button" class="js-menu-trigger sliding-menu-button menulines-button x2" role="button" aria-label="Toggle Navigation">
+	<span class="menulines"></span>
+</button>
+
+<div class="js-menu-screen menu-screen"></div>
+
+    <div id="page-wrapper">
+      <!--[if lt IE 9]><div class="upgrade notice-danger"><strong>Your browser is quite old!</strong> Why not <a href="http://whatbrowser.org/">upgrade to a newer one</a> to better enjoy this site?</div><![endif]-->
+
+      <div id="main" role="main">	
+	<article class="wrap" itemscope itemtype="http://schema.org/Article">
+		
+		
+		<div class="page-title">
+			<h1>Terminal</h1>
+		</div>
+		<div class="inner-wrap">
+			<nav class="toc"></nav><!-- /.toc -->
+			<div id="content" class="page-content" itemprop="articleBody">
+				<p>Export your services as curl commands so you can easily share them. To monitor them and protect yourself from service changes export them to be run by the Curly Test Runner.</p>
+
+<h3 id="export-as-curl">Export as curl</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl --request POST --data <span class="s1">&#39;email=onato.com@gmail.com&amp;type=note&amp;title=Curly Alert&amp;body=One of your services failed!&#39;</span> -H <span class="s1">&#39;Authorization: Bearer eHUemjHKPMnbqhvaQvu6GF6iRW5yTTNr&#39;</span> https://api.pushbullet.com/v2/pushes -i</code></pre></div>
+
+<h3 id="export-for-monitoring">Export for Monitoring</h3>
+
+<p>A script like the one below can be generated that contains the details of your service plus the verification script for insuring correctness. This can be run by the Curly Test Runner which will send a push notification to your devices through the Pushbullet service. This way you will get word as soon as a server goes down or a colleague applies a breaking change.</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span><span class="p">(</span><span class="s1">&#39;should&#39;</span><span class="p">)</span>
+<span class="n">var</span> <span class="n">curly</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">&#39;curly&#39;</span><span class="p">);</span>
+<span class="n">describe</span><span class="p">(</span><span class="s1">&#39;Curly&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(){</span>
+  <span class="n">it</span><span class="p">(</span><span class="s1">&#39;403&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">done</span><span class="p">){</span>
+    <span class="n">var</span> <span class="n">service</span> <span class="o">=</span> <span class="p">{</span><span class="ss">url</span><span class="p">:</span><span class="s1">&#39;http://development.onato.com/curly/403.php&#39;</span><span class="p">,</span> <span class="ss">json</span><span class="p">:</span><span class="kp">true</span><span class="p">};</span>
+    <span class="n">curly</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">statusCode</span><span class="p">,</span> <span class="n">statusCodeString</span><span class="p">,</span> <span class="n">contentType</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">responseString</span><span class="p">,</span> <span class="n">headers</span><span class="p">){</span>
+    
+    
+    <span class="n">statusCode</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">exactly</span><span class="p">(</span><span class="mi">4030</span><span class="p">);</span>
+    <span class="n">statusCodeString</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">exactly</span><span class="p">(</span><span class="s2">&quot;forbidden&quot;</span><span class="p">);</span>
+    <span class="n">responseString</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sr">/.*denied.*/</span><span class="p">);</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">containDeep</span><span class="p">({</span><span class="s2">&quot;message&quot;</span> <span class="p">:</span> <span class="s2">&quot;access denied&quot;</span><span class="p">});</span>
+    
+    
+    <span class="n">done</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="err">…</span></code></pre></div>
+
+
+				<hr />
+				<footer class="page-footer">
+					<div class="inline-btn">
+	<a class="btn-social twitter" href="https://twitter.com/intent/tweet?text=Terminal&amp;url=/terminal/&amp;via=" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> Share on Twitter</a>
+	<a class="btn-social facebook" href="https://www.facebook.com/sharer/sharer.php?u=/terminal/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i> Share on Facebook</a>
+	<a class="btn-social google-plus"  href="https://plus.google.com/share?url=/terminal/" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i> Share on Google+</a>
+</div><!-- /.share-this -->
+					<div class="page-meta">
+	<p>Updated <time datetime="2014-11-25T00:00:00Z" itemprop="datePublished">November 25, 2014</time></p>
+</div><!-- /.page-meta -->
+				</footer><!-- /.footer -->
+				<aside>
+					
+				</aside>
+			</div><!-- /.content -->
+		</div><!-- /.inner-wrap -->
+		
+	</article><!-- /.wrap -->
+</div><!-- /#main -->
+
+      <footer role="contentinfo" id="site-footer">
+	<nav role="navigation" class="menu bottom-menu">
+		<ul class="menu-item">
+		
+      
+        
+      
+			<li><a href="" ></a></li>
+		
+		</ul>
+	</nav><!-- /.bottom-menu -->
+	<p class="copyright">&#169; 2014 <a href="">CURLY: Webservice Client</a> powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> + <a href="http://mmistakes.github.io/skinny-bones-jekyll/" rel="nofollow">Skinny Bones</a>.</p>
+</footer>
+    </div>
+
+    <script src="/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="/js/main.js"></script>
+    
+    
+
+  </body>
+
+</html>
