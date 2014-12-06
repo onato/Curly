@@ -1,4 +1,4 @@
-var curly = require('../curly');
+var curly = require('../curly/curly');
 
 describe('GitHub', function(){
   it('Status', function(done){
