@@ -1,0 +1,14 @@
+{
+	"name": "Curly-Test-Runner",
+	"version": "1.0.0",
+	"description": "The curly test runner runs webservice tests which can be exported from OSX app Curly.",
+	"dependencies":{
+		"request": "x",
+		"stream": "x",
+		"JSONStream": "x",
+		"event-stream": "x",
+		"should": "x",
+		"mocha": "x",
+		"colors": "x"
+		}
+}
