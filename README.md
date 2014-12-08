@@ -41,7 +41,6 @@ describe('GitHub', function(){
       response.should.have.property("created_on");
       var dateCreated = new Date(response["created_on"]);
       dateCreated.getTime().should.not.be.NaN;
-      
       //End Verification Script
 
       done();
