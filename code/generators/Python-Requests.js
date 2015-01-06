@@ -1,10 +1,6 @@
 function generateCode(service) {
 
     var url = service.url;
-    if (["GET", "HEAD", "DELETE"]) {
-        url += "?" + service.data;
-    };
-
 	var code = "# Install the \"Requests\" library\n";
 	code += "# pip install requests\n\n";
     code += "import requests\n\n" 
