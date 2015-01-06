@@ -6,6 +6,7 @@
   "headers" : [
 
   ],
+  "contentType" : "application\/json",
   "url" : "https:\/\/status.github.com\/api\/status.json",
   "running" : 0,
   "data" : "",
