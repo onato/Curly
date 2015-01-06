@@ -12,7 +12,7 @@ function generateCode(service) {
     	};
 	    headersString += "                '"+header.type+"':'"+header.value+"'";
     }
-    headersString += "\n              };\n";
+    headersString += "\n              };\n\n";
     code += headersString;
     code += "var options = {\n";
     if (service.method) {
@@ -21,7 +21,7 @@ function generateCode(service) {
     code += "                 url:'https://status.github.com/api/last-message.json',\n";
     code += "                 headers:headers,\n";
     code += "                 json:true\n";
-    code += "               };\n";
+    code += "               };\n\n";
 	code += "request(options, function (error, response, body) {\n";
 	code += "    // repond to the request.\n";
 	code += "});\n";
