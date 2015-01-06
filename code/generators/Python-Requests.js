@@ -1,12 +1,12 @@
 function generateCode(service) {
 
     var url = service.url;
-	var code = "# Install the \"Requests\" library\n";
-	code += "# pip install requests\n\n";
+    var code = "# Install the \"Requests\" library\n";
+    code += "# pip install requests\n\n";
     code += "import requests\n\n" 
     code += "try:\n";
     code += "  r = requests." + service.method.toLowerCase() + "(\n"
-	code += "    url = '"+url+"',\n";
+    code += "    url = '"+url+"',\n";
     code += "    params = " + formatData(service.data) + ",\n";
 
     code += "    headers = {\n";
@@ -22,7 +22,7 @@ function generateCode(service) {
     code += "except requests.exceptions.RequestException as e:\n";
     code += "  print e\n";
 
-	return code;
+    return code;
 }
 
 function formatData(data){
