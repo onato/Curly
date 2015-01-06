@@ -4,12 +4,16 @@
 
   ],
   "headers" : [
-
+    {
+      "value" : "header1Value",
+      "class" : "OHeader",
+      "type" : "header1Key"
+    }
   ],
   "contentType" : "application\/json",
   "url" : "https:\/\/status.github.com\/api\/status.json",
   "running" : 0,
-  "data" : "",
+  "data" : "key=value",
   "gzipped" : 1,
   "response" : {
     "isJSON" : 1,

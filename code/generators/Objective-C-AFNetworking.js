@@ -1,29 +1,28 @@
 function generateCode(service) {
+    var code = "";
 
-	var code = "";
-
-    if (!service.method) {
+    if (typeof service.method === "undefined") {
         service.method = "GET";
     };
+    var standardMethods = ["GET","POST","HEAD","PUT","PATCH","DELETE"];
 
-	if (!service.contentType && !service.httpStatus && ["GET","POST","HEAD","PUT","PATCH","DELETE"].contains(service.method) ) {
-		code = generateSimpleCode(service);
-	}else{
-		code = generateFlexibleCode(service);
-	}
-
-	return code;
+    if (!service.contentType && !service.httpStatus && standardMethods.indexOf(service.method) >= 0 ) {
+        code = generateSimpleCode(service);
+    }else{
+        code = generateFlexibleCode(service);
+    }
+    
+    return code;
 }
 
 function generateSimpleCode(service) {
 	var code = "";
-
 	code += "AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];\n";
 
     code += "\n// Add Headers\n";
     for(key in service.headers) {
     	var header = service.headers[key];
-	    code += "[_manager.requestSerializer setValue:@\"" + header.value + "\" forHTTPHeaderField:@\"" + header.type + "\"];\n";
+	    code += "[manager.requestSerializer setValue:@\"" + header.value + "\" forHTTPHeaderField:@\"" + header.type + "\"];\n";
     }
     code += "\n";
 
@@ -43,19 +42,32 @@ function generateSimpleCode(service) {
 
 function generateFlexibleCode(service) {
 	var code = "";
-	code += "NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@\"" + service.url + "\"]];\n";
+    code += "NSString *urlString = @\"" + service.url + "\";\n";
+    code += "NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];\n";
 	
 	code += "[request setHTTPMethod:@\"" + (service.method? service.method : "GET") + "\"];\n";
     if (!service.method || service.method == "GET") {//js
-    	code += "NSDictionary *paramsDict = @" + service.dataDictionary;
-    	code += "request = (NSMutableURLRequest *)[[self requestSerializer] requestBySerializingRequest:request withParameters:paramsDict error:nil];\n";
+        var params = "@{};";
+        if (service.dataDictionary) {
+            params = "@" + service.dataDictionary;
+            code += "NSDictionary *paramsDict = " + params + "\n";
+            code += "AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];\n";
+            code += "request = (NSMutableURLRequest *)[requestSerializer requestBySerializingRequest:request withParameters:paramsDict error:nil];\n";
+        }else if (service.data) {
+            var urlAppendingMethods = ["GET","HEAD","DELETE"];
+            if (urlAppendingMethods.indexOf(service.method) >= 0) {
+                code += "    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@\"%@?%@\", urlString, @\"" + service.data + "\"]]];\n";
+            }else{
+                code += "[request setHTTPBody:[@\"" + service.data + "\" dataUsingEncoding:NSUTF8StringEncoding]];\n";
+            }
+        }
     }else{
-		code += "NSString *data = @\"" + service.data + "\";\n";
-		code += "[request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];\n";
+        code += "NSString *data = @\"" + service.data + "\";\n";
+        code += "[request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];\n";
     }
 
-	code += "NSString *contentType = @\"" + (service.contentType? service.contentType : "application/x-www-form-urlencoded; charset=utf-8") + "\";\n";
-	code += "[request setValue:contentType forHTTPHeaderField:@\"Content-Type\"];\n";
+    code += "NSString *contentType = @\"" + (service.contentType? service.contentType : "application/x-www-form-urlencoded; charset=utf-8") + "\";\n";
+    code += "[request setValue:contentType forHTTPHeaderField:@\"Content-Type\"];\n";
 
     code += "\n// Add Headers\n";
     for(key in service.headers) {
@@ -79,7 +91,7 @@ function generateFlexibleCode(service) {
     }
 
     if (service.contentType) {
-        code += "[serializer setAcceptableContentTypes:[NSSet setWithArray:@[@\"application/json\", @\"text/html\", service.contentType]]];\n";
+        code += "[serializer setAcceptableContentTypes:[NSSet setWithArray:@[@\"application/json\", @\"text/html\", @\"" + service.contentType + "\"]]];\n";
     }else{
         code += "[serializer setAcceptableContentTypes:[NSSet setWithArray:@[@\"application/json\", @\"text/html\"]]];\n";
     }
