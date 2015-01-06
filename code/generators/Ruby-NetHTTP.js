@@ -1,9 +1,6 @@
 function generateCode(service) {
 
-    var url = service.url;
-    if (["GET", "HEAD", "DELETE"]) {
-        url += "?" + service.data;
-    };
+    var url = service.url + "?" + service.data;
     var method = capitaliseFirstLetter(service.method);
 
 	var code = "require 'net/http'\n\n";
