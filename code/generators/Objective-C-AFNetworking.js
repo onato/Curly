@@ -1,9 +1,6 @@
 function generateCode(service) {
     var code = "";
 
-    if (typeof service.method === "undefined") {
-        service.method = "GET";
-    };
     var standardMethods = ["GET","POST","HEAD","PUT","PATCH","DELETE"];
 
     if (!service.contentType && !service.httpStatus && standardMethods.indexOf(service.method) >= 0 ) {
@@ -43,10 +40,10 @@ function generateSimpleCode(service) {
 function generateFlexibleCode(service) {
     var code = "";
     code += "NSString *urlString = @\"" + service.url + "\";\n";
-    code += "NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];\n";
 
-    code += "[request setHTTPMethod:@\"" + (service.method? service.method : "GET") + "\"];\n";
+    var initURLRequestWithURL = "NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];\n";
     if (service.dataDictionary) {
+        code += initURLRequestWithURL;
         params = "@" + service.dataDictionary;
         code += "NSDictionary *paramsDict = " + params + "\n";
         code += "AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];\n";
@@ -55,13 +52,16 @@ function generateFlexibleCode(service) {
         var params = "@{};";
         var urlAppendingMethods = ["GET","HEAD","DELETE"];
         if (urlAppendingMethods.indexOf(service.method) >= 0) {
-            code += "    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@\"%@?%@\", urlString, @\"" + service.data + "\"]]];\n";
+            code += "NSString *urlStringWithParams = [NSString stringWithFormat:@\"%@?%@\", urlString, @\"" + service.data + "\"];\n";
+            code += "NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStringWithParams]];\n";
         }else{
+            code += initURLRequestWithURL;
             code += "NSString *data = @\"" + service.data + "\";\n";
             code += "[request setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];\n";
         }
     }
 
+    code += "[request setHTTPMethod:@\"" + (service.method? service.method : "GET") + "\"];\n";
     code += "NSString *contentType = @\"" + (service.contentType? service.contentType : "application/x-www-form-urlencoded; charset=utf-8") + "\";\n";
     code += "[request setValue:contentType forHTTPHeaderField:@\"Content-Type\"];\n";
 

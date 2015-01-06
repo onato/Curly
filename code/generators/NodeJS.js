@@ -18,7 +18,7 @@ function generateCode(service) {
     if (service.method) {
 	    code += "                 method:'" + service.method + "',\n";
     };
-    code += "                 url:'https://status.github.com/api/last-message.json',\n";
+    code += "                 url:'" + service.url + "',\n";
     code += "                 headers:headers,\n";
     code += "                 json:true\n";
     code += "               };\n\n";

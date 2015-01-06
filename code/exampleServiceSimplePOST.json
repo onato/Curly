@@ -11,8 +11,8 @@
     }
   ],
   "contentType": "application/json",
-  "url" : "http:\/\/development.onato.com\/curly\/customHeader.php",
-  "method": "GET",
+  "url" : "http:\/\/development.onato.com\/curly\/post.php",
+  "method": "POST",
   "running" : 0,
   "data" : "key=value",
   "gzipped" : 1,
