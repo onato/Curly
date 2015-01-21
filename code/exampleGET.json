@@ -1,0 +1,67 @@
+{
+  "verificationScript" : "statusCode.should.be.exactly(200)\n",
+  "servicesLoggingIn" : [
+
+  ],
+  "headers" : [
+    {
+      "value" : "Custom User Secret Agent",
+      "class" : "OHeader",
+      "type" : "User-Agent"
+    },
+    {
+      "value" : "Eat Your Crusts",
+      "class" : "OHeader",
+      "type" : "X-CURLY-CUSTOM-HEADER"
+    }
+  ],
+  "status" : -1,
+  "httpStatus" : 403,
+  "parameters" : [
+    {
+      "value" : "0",
+      "class" : "OParameter",
+      "type" : "array[]"
+    },
+    {
+      "value" : "1",
+      "class" : "OParameter",
+      "type" : "param2"
+    },
+    {
+      "value" : "1",
+      "class" : "OParameter",
+      "type" : "array[]"
+    },
+    {
+      "value" : "0",
+      "class" : "OParameter",
+      "type" : "param1"
+    }
+  ],
+  "url" : "http:\/\/development.onato.com\/curly\/get.php",
+  "running" : 0,
+  "parametersObject" : {
+    "array" : [
+      "0",
+      "1"
+    ],
+    "param2" : "1",
+    "param1" : "0"
+  },
+  "data" : "param1=éö+%&param2=abcd",
+  "gzipped" : 0,
+  "response" : {
+    "isJSON" : 1,
+    "isGZipped" : 1,
+    "statusCode" : 200,
+    "contentType" : "application\/json",
+    "time" : 0.70082,
+    "class" : "OResponse",
+    "headers" : "{\n  \"Server\" : \"Apache\",\n  \"X-Powered-By\" : \"PHP\\\/5.5.14\",\n  \"MS-Author-Via\" : \"DAV\",\n  \"Connection\" : \"Keep-Alive\",\n  \"Content-Type\" : \"application\\\/json\",\n  \"Date\" : \"Mon, 19 Jan 2015 19:45:08 GMT\",\n  \"Content-Encoding\" : \"gzip\",\n  \"Content-Length\" : \"277\",\n  \"Keep-Alive\" : \"timeout=15, max=94\",\n  \"Vary\" : \"Accept-Encoding\"\n}",
+    "text" : "{\n  \"headers\" : {\n    \"Accept\" : \"*\\\/*\",\n    \"Accept-Encoding\" : \"gzip, deflate\",\n    \"Connection\" : \"keep-alive\",\n    \"Host\" : \"development.onato.com\",\n    \"User-Agent\" : \"Custom User Secret Agent\",\n    \"Authorization\" : \"Basic dXNlcjpwd2Q=\",\n    \"X-CURLY-CUSTOM-HEADER\" : \"Eat Your Crusts\",\n    \"Accept-Language\" : \"en;q=1\",\n    \"X_FORWARDED_PROTO\" : \"http\"\n  },\n  \"params\" : {\n    \"param2\" : \"abcd\",\n    \"param1\" : \"éö+%\"\n  }\n}"
+  },
+  "class" : "OService",
+  "name" : "GET",
+  "method" : "GET"
+}

@@ -7,7 +7,7 @@ function generateCode(service) {
     code += "try:\n";
     code += "  r = requests." + service.method.toLowerCase() + "(\n"
     code += "    url = '"+url+"',\n";
-    code += "    params = " + formatData(service.data) + ",\n";
+    code += "    params = " + formatParameters(service.parametersObject) + ",\n";
 
     code += "    headers = {\n";
     for(key in service.headers) {
@@ -34,4 +34,16 @@ function formatData(data){
     };
 
     return JSON.stringify(returnDict);
+}
+
+function formatParameters(parameters){
+    var newParameters = {};
+    for(key in parameters) {
+        var value = parameters[key];
+        if (Array.isArray(value)) {
+            key += "[]";
+        };
+        newParameters[key]=value;
+    };
+    return JSON.stringify(newParameters);
 }

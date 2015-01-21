@@ -20,6 +20,7 @@ function generateCode(service) {
     };
     code += "                 url:'" + service.url + "',\n";
     code += "                 headers:headers,\n";
+    code += "                 qs:" + JSON.stringify(service.parametersObject) + ",\n";
     code += "                 json:true\n";
     code += "               };\n\n";
 	code += "request(options, function (error, response, body) {\n";
