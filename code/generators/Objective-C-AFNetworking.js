@@ -24,11 +24,13 @@ function generateSimpleCode(service) {
     code += "\n";
 
     var parameters = "nil";
-    if (service.dataDictionary) {
-        parameters = "@" + service.dataDictionary;
+    if (service.parametersObject) {
+        parameters = JSON.stringify(service.parametersObject).replace( new RegExp('([{,:\[])(["])',"gm"),"$1@$2")
+        parameters = parameters.replace( "[", "@[");
+        parameters = "@" + parameters;
     };
-
-    code += "[manager GET:@\"" + service.url + "\" parameters:" + parameters + " success:^(AFHTTPRequestOperation *operation, id responseObject) {\n";
+    code += "NSDictionary *parameters=" + parameters + ";\n";;
+    code += "[manager GET:@\"" + service.url + "\" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {\n";
     code += "    NSLog(@\"JSON: %@\", responseObject);\n";
     code += "} failure:^(AFHTTPRequestOperation *operation, NSError *error) {\n";
     code += "    NSLog(@\"Error: %@\", error);\n";

@@ -16,7 +16,6 @@
     }
   ],
   "status" : -1,
-  "httpStatus" : 403,
   "parameters" : [
     {
       "value" : "0",
